@@ -29,6 +29,7 @@ class AnimSearchBar extends StatefulWidget {
   final bool closeSearchOnSuffixTap;
   final Color? color;
   final Color? cursorColor;
+  final Color? iconColor;
   final List<TextInputFormatter>? inputFormatters;
 
   const AnimSearchBar({
@@ -65,6 +66,7 @@ class AnimSearchBar extends StatefulWidget {
     /// can add list of inputformatters to control the input
     this.inputFormatters,
     this.cursorColor,
+    this.iconColor,
   }) : super(key: key);
 
   @override
@@ -172,6 +174,9 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                           : Icon(
                               Icons.close,
                               size: 20.0,
+                              color: widget.iconColor != null
+                                  ? widget.iconColor
+                                  : Colors.black,
                             ),
                     ),
                     builder: (context, widget) {
@@ -254,12 +259,16 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                 ///prefixIcon is of type Icon
                 icon: widget.prefixIcon != null
                     ? toggle == 1
-                        ? Icon(Icons.arrow_back_ios)
+                        ? Icon(Icons.arrow_back_ios,
+                            color: widget.iconColor != null
+                                ? widget.iconColor
+                                : Colors.black)
                         : widget.prefixIcon!
-                    : Icon(
-                        toggle == 1 ? Icons.arrow_back_ios : Icons.search,
+                    : Icon(toggle == 1 ? Icons.arrow_back_ios : Icons.search,
                         size: 20.0,
-                      ),
+                        color: widget.iconColor != null
+                            ? widget.iconColor
+                            : Colors.black),
                 onPressed: () {
                   setState(
                     () {
